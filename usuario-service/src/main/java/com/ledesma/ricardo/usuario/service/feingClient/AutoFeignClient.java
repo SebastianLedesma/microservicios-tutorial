@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "auto-service")
+@FeignClient(name = "auto-service", path = "/api/auto")
 public interface AutoFeignClient {
 
     @GetMapping("/usuario/{userId}")
