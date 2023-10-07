@@ -48,12 +48,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     public List<Auto> getAutos(int usuarioId){
-        List<Auto> autoList = this.restTemplate.getForObject("http://localhost:8082/api/auto/usuario/" + usuarioId,List.class);
+        List<Auto> autoList = this.restTemplate.getForObject("http://auto-service/api/auto/usuario/" + usuarioId,List.class);
         return  autoList;
     }
 
     public List<Moto> getMotos(int usuarioId){
-        List<Moto> motoList = this.restTemplate.getForObject("http://localhost:8083/api/moto/" + usuarioId,List.class);
+        List<Moto> motoList = this.restTemplate.getForObject("http://moto-service/api/moto/" + usuarioId,List.class);
         return motoList;
     }
 
@@ -79,14 +79,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         result.put("Usuario",usuario);
         List<Auto> autos = this.autoFeignClient.getByUserId(userId);
 
-        if(autos.isEmpty()){
+        if(autos == null || autos.isEmpty()){
             result.put("autos","El usuario no tiene autos.");
         }else{
             result.put("autos",autos);
         }
 
         List<Moto> motos = this.motoFeignClient.getByUserId(userId);
-        if(motos.isEmpty()){
+        if(motos == null || motos.isEmpty()){
             result.put("motos","El usuario no tiene motos.");
         }else{
             result.put("motos",motos);
