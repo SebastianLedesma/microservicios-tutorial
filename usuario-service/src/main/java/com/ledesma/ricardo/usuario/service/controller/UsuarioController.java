@@ -94,7 +94,7 @@ public class UsuarioController {
         return new ResponseEntity("El usuario con id " + userId + " tiene los autos en el taller.", HttpStatus.OK);
     }
 
-    private ResponseEntity<Auto> fallBackGetAutos(@PathVariable int userId, @RequestBody Auto auto, RuntimeException ex){
+    private ResponseEntity<Auto> fallBackSaveAuto(@PathVariable int userId, @RequestBody Auto auto, RuntimeException ex){
         return new ResponseEntity("El usuario con id " + userId + " no tiene dinero para un auto.", HttpStatus.OK);
     }
 
@@ -105,6 +105,10 @@ public class UsuarioController {
 
     private ResponseEntity<Moto> fallBackSaveMoto(@PathVariable int userId, @RequestBody Moto moto, RuntimeException ex){
         return new ResponseEntity("El usuario con id " + userId + " no tiene dinero para una moto.", HttpStatus.OK);
+    }
+
+    private ResponseEntity<Map<String, Object>> fallBackGetListOfVehicules(@PathVariable Integer userId, RuntimeException ex){
+        return new ResponseEntity("El usuario con id " + userId + " tiene los vehiculos en el taller.", HttpStatus.OK);
     }
 
 }
